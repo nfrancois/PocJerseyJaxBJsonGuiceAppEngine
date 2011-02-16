@@ -45,6 +45,51 @@ public class HelloResourceTest extends JerseyTest {
 		assertThat(clientResponse.getType()).isEqualTo(MediaType.APPLICATION_JSON_TYPE);
 	}
 	
+	@Test
+	public void shoudBeJsonpWithCallbackNameParam(){
+		String relativeUrl = "hello";
+		String name ="Nicolas";
+		String callbackName = "monCallback";
+		WebResource path = resource().path(relativeUrl).path(name+".jsonp").queryParam("callback", callbackName);
+		System.out.println(path.getURI().toString());
+		ClientResponse clientResponse = path.getRequestBuilder().head();		
+		int status = clientResponse.getStatus();
+		assertThat(clientResponse.getType().getType()).isEqualTo("application");
+		assertThat(clientResponse.getType().getSubtype()).isEqualTo("x-javascript");
+		assertThat(status).isEqualTo(Status.OK.getStatusCode());
+		String response = path.get(String.class);
+		assertThat(response).isNotNull().startsWith(callbackName);	
+	}
+	
+	
+	@Test
+	public void shoudBeJsonpWithoutCallbackNameParam(){
+		String relativeUrl = "hello";
+		String name ="Nicolas";
+		WebResource path = resource().path(relativeUrl).path(name+".jsonp");
+		ClientResponse clientResponse = path.getRequestBuilder().head();		
+		int status = clientResponse.getStatus();
+		assertThat(clientResponse.getType().getType()).isEqualTo("application");
+		assertThat(clientResponse.getType().getSubtype()).isEqualTo("x-javascript");
+		assertThat(status).isEqualTo(Status.OK.getStatusCode());
+		String response = path.get(String.class);
+		assertThat(response).isNotNull().startsWith("jsonpCallback");	
+	}	
+	
+	@Test
+	public void shoudBeJsonpWithBlankCallbackNameParam(){
+		String relativeUrl = "hello";
+		String name ="Nicolas";
+		WebResource path = resource().path(relativeUrl).path(name+".jsonp").queryParam("callback", "");
+		ClientResponse clientResponse = path.getRequestBuilder().head();		
+		int status = clientResponse.getStatus();
+		assertThat(clientResponse.getType().getType()).isEqualTo("application");
+		assertThat(clientResponse.getType().getSubtype()).isEqualTo("x-javascript");
+		assertThat(status).isEqualTo(Status.OK.getStatusCode());
+		String response = path.get(String.class);
+		assertThat(response).isNotNull().startsWith("jsonpCallback");	
+	}		
+	
 	private void doShoulReplyHello(MediaType type){
 		String relativeUrl = "hello";
 		String name ="Nicolas";
