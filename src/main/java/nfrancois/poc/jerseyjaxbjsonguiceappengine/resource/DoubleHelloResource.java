@@ -1,0 +1,36 @@
+package nfrancois.poc.jerseyjaxbjsonguiceappengine.resource;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import nfrancois.poc.jerseyjaxbjsonguiceappengine.model.Hello;
+import nfrancois.poc.jerseyjaxbjsonguiceappengine.service.HelloService;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
+@Path("doublehello")
+@Singleton
+@Produces({MediaType.APPLICATION_JSON/*, MediaType.APPLICATION_XML*/})
+public class DoubleHelloResource {
+	
+	@Inject
+	private HelloService helloService;
+	
+	@GET
+	@Path("/{name}")
+	public List<Hello> reply(@PathParam("name") String name){
+		Hello hello = helloService.saysHelloToSomeone(name);
+		List<Hello> hellos = new ArrayList<Hello>();
+		hellos.add(hello);
+		hellos.add(hello);
+		return hellos;
+	}
+	
+}
