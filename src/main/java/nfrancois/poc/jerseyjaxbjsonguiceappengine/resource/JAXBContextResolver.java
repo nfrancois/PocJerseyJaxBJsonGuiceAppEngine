@@ -7,7 +7,7 @@ import javax.xml.bind.JAXBContext;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
 
-//@Provider
+@Provider
 public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 
 	/** Package that contains object that can be mapped */
@@ -21,8 +21,9 @@ public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 
 	@Override
 	public JAXBContext getContext(Class<?> objectType) {
-		if(objectType.getPackage().getName().equals(SHARED_OBJECT_PACKAGE)){
-			return context;}
-		return null;
+		//if(objectType.getPackage().getName().equals(SHARED_OBJECT_PACKAGE)){
+			return context;
+       //  }
+		//return null;
 	}
 }
