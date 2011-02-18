@@ -26,10 +26,10 @@ public class DoubleHelloResource {
 	@GET
 	@Path("/{name}")
 	public List<Hello> reply(@PathParam("name") String name){
-		Hello hello = helloService.saysHelloToSomeone(name);
+	  //Hello hello = ;
 		List<Hello> hellos = new ArrayList<Hello>();
-		hellos.add(hello);
-		hellos.add(hello);
+		hellos.add(helloService.saysHelloToSomeone(name));
+		hellos.add(helloService.saysHelloToSomeone(name));
 		return hellos;
 	}
 	
