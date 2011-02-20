@@ -2,9 +2,7 @@ package nfrancois.poc.jerseyjaxbjsonguiceappengine.resource;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
 
@@ -54,25 +52,26 @@ public class DoubleHelloResourceTest extends JerseyTest {
 	}
 	
 	@Test
-	public void shoudHaveTwoHelloInNormalJson(){
+	public void shoudHaveTwoHello(){
 		String relativeUrl = "doublehello";
 		String name ="Nicolas";
-		WebResource path = resource().path(relativeUrl).path(name);
-		assertThat(path.getURI().toString()).isEqualTo(getFullUrl(relativeUrl, name));
-		ClientResponse clientResponse = path.getRequestBuilder().head();
-		int status = clientResponse.getStatus();
-		assertThat(clientResponse.getType()).isEqualTo(MediaType.APPLICATION_JSON_TYPE);
-		assertThat(status).isEqualTo(Status.OK.getStatusCode());
-		List<Hello> responseAsList = path.get(new GenericType<List<Hello>>(){});
-		assertThat(responseAsList).isNotNull().hasSize(2);
-		String reponseAsString = path.get(String.class);
-		assertThat(reponseAsString).isEqualTo("[{\"message\":\"Hello\",\"name\":\"Nicolas\"},{\"message\":\"Hello\",\"name\":\"Nicolas\"}]");
+		ClientResponse response = resource().path(relativeUrl).path(name).get(ClientResponse.class);
+		assertThat(response.getStatus()).isEqualTo(Status.OK.getStatusCode());
+		assertThat(response.getType()).isEqualTo(MediaType.APPLICATION_JSON_TYPE);
+		List<Hello> hellos = response.getEntity(new GenericType<List<Hello>>(){});
+		assertThat(hellos).isNotNull().hasSize(2);
 	}
 	
-	private String getFullUrl(String relativeUrl, String name){
-		return getBaseURI().toString()+relativeUrl+"/"+name;
-	}	
-	
+	@Test
+	public void shoudBeInNaturalJson(){
+		String relativeUrl = "doublehello";
+		String name ="Nicolas";
+		ClientResponse response = resource().path(relativeUrl).path(name).get(ClientResponse.class);
+		assertThat(response.getStatus()).isEqualTo(Status.OK.getStatusCode());
+		assertThat(response.getType()).isEqualTo(MediaType.APPLICATION_JSON_TYPE);
+		String hellos = response.getEntity(String.class);
+		assertThat(hellos).isEqualTo("[{\"message\":\"Hello\",\"name\":\"Nicolas\"},{\"message\":\"Hello\",\"name\":\"Nicolas\"}]");
+	}
 	
 	public class GuiceTestConfig extends GuiceServletContextListener {
 		@Override
