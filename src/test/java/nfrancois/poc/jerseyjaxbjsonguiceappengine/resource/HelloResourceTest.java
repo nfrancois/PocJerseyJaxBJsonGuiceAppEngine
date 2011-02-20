@@ -4,29 +4,14 @@ import static org.fest.assertions.Assertions.assertThat;
 
 import javax.ws.rs.core.MediaType;
 
-import nfrancois.poc.jerseyjaxbjsonguiceappengine.GuiceServletConfig;
 import nfrancois.poc.jerseyjaxbjsonguiceappengine.model.Hello;
 
 import org.junit.Test;
 
-import com.google.inject.servlet.GuiceFilter;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.test.framework.AppDescriptor;
-import com.sun.jersey.test.framework.JerseyTest;
-import com.sun.jersey.test.framework.WebAppDescriptor;
 
-public class HelloResourceTest extends JerseyTest {
-	
-	@Override
-	protected AppDescriptor configure() {
-		return new WebAppDescriptor.Builder()
-									.contextListenerClass(GuiceServletConfig.class)
-									.filterClass(GuiceFilter.class)
-									.servletPath("/")
-									.build();
-	}
+public class HelloResourceTest extends AbstractResourceTest<HelloResource> {
 	
 	@Test
 	public void shoulReplyHelloInXml(){
@@ -88,5 +73,10 @@ public class HelloResourceTest extends JerseyTest {
 		assertThat(response).isNotNull();
 		assertThat(hello.getMessage()).isEqualTo("Hello");
 		assertThat(hello.getName()).isEqualTo("Nicolas");		
+	}
+
+	@Override
+	protected Class<HelloResource> getTestingResourceClass() {
+		return HelloResource.class;
 	}
 }
