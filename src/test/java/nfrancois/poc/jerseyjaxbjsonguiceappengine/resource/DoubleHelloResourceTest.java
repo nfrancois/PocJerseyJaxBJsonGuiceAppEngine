@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
 
-import nfrancois.poc.jerseyjaxbjsonguiceappengine.GuiceServletConfig;
 import nfrancois.poc.jerseyjaxbjsonguiceappengine.model.Hello;
 
 import org.junit.Test;
@@ -31,22 +30,23 @@ import com.sun.jersey.test.framework.WebAppDescriptor;
 
 public class DoubleHelloResourceTest extends JerseyTest {
 	
-//	private static Injector injector =  Guice.createInjector(new ServletModule() {
-//		
-//		@Override
-//		protected void configureServlets() {
-//			final Map<String, String> params = new HashMap<String, String>();
-//			bind(DoubleHelloResource.class);
-//			serve("/*").with(GuiceContainer.class, params);
-//		}
-//	});	
+	private static Injector injector =  Guice.createInjector(new ServletModule() {
+		
+		@Override
+		protected void configureServlets() {
+			final Map<String, String> params = new HashMap<String, String>();
+			bind(DoubleHelloResource.class);
+			bind(JAXBContextResolver.class);
+			serve("/*").with(GuiceContainer.class, params);
+		}
+	});	
 	
 	@Override
 	protected AppDescriptor configure() {
 		ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getClasses().add(JAXBContextResolver.class);
-		return new WebAppDescriptor.Builder("com.sun.jersey.samples.jsonp.config")
-			        .contextListenerClass(GuiceServletConfig.class)
+		return new WebAppDescriptor.Builder("nfrancois.poc.jerseyjaxbjsonguiceappengine.resource")
+			        .contextListenerClass(GuiceTestConfig.class)
 			        .filterClass(GuiceFilter.class)
 			        .clientConfig(clientConfig)
 			        .servletPath("/")
@@ -73,11 +73,11 @@ public class DoubleHelloResourceTest extends JerseyTest {
 		return getBaseURI().toString()+relativeUrl+"/"+name;
 	}	
 	
-//	
-//	public class GuiceTestConfig extends GuiceServletContextListener {
-//		@Override
-//		public Injector getInjector() {
-//			return injector;
-//		}
-//	}		
+	
+	public class GuiceTestConfig extends GuiceServletContextListener {
+		@Override
+		public Injector getInjector() {
+			return injector;
+		}
+	}		
 }
