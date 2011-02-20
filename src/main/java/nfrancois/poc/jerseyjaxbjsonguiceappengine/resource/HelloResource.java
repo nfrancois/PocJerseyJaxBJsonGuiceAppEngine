@@ -40,4 +40,9 @@ public class HelloResource {
 		return new JSONWithPadding(helloService.saysHelloToSomeone(name), callback);
 	}	
 	
+	
+	public void setHelloService(HelloService helloService) {
+		this.helloService = helloService;
+	}
+	
 }

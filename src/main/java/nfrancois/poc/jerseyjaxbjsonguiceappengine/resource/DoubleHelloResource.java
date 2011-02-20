@@ -26,7 +26,6 @@ public class DoubleHelloResource {
 	@GET
 	@Path("/{name}")
 	public List<Hello> reply(@PathParam("name") String name){
-	  //Hello hello = ;
 		List<Hello> hellos = new ArrayList<Hello>();
 		hellos.add(helloService.saysHelloToSomeone(name));
 		hellos.add(helloService.saysHelloToSomeone(name));
