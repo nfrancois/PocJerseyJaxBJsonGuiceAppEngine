@@ -70,17 +70,6 @@ public class HelloResourceTest extends AbstractResourceTest<HelloResource> {
 		assertThat(response.getEntity(String.class)).isNotNull().startsWith("jsonpCallback");	
 	}	
 	
-	@Test
-	public void shoudBeJsonpWithBlankCallbackNameParam(){
-		String message = "Hello";
-		String name ="Nicolas";
-		when(helloServiceMock.saysHelloToSomeone("Nicolas")).thenReturn(new Hello(message, name));			
-		ClientResponse response = resource().path("hello").path(name+".jsonp").queryParam("callback", "").get(ClientResponse.class);
-		assertThat(response.getStatus()).isEqualTo(Status.OK.getStatusCode());
-		assertThat(response.getType().toString()).isEqualTo("application/x-javascript");
-		assertThat(response.getEntity(String.class)).isNotNull().startsWith("jsonpCallback");
-	}		
-	
 	private void doShoulReplyHello(MediaType type){
 		String message = "Hello";
 		String name ="Nicolas";

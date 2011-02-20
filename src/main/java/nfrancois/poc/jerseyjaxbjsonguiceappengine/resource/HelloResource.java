@@ -1,5 +1,6 @@
 package nfrancois.poc.jerseyjaxbjsonguiceappengine.resource;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -33,10 +34,7 @@ public class HelloResource {
 	@GET
 	@Path("{name}.jsonp")
     @Produces("application/x-javascript")
-	public JSONWithPadding replyWithJsonP(@PathParam("name") String name, @QueryParam("callback") String callback){
-		if (callback == null || "".equals(callback)) {
-			callback = CALLBACK_DEFAULT_NAME;
-		}
+	public JSONWithPadding replyWithJsonP(@PathParam("name") String name, @QueryParam("callback") @DefaultValue(CALLBACK_DEFAULT_NAME) String callback){
 		return new JSONWithPadding(helloService.saysHelloToSomeone(name), callback);
 	}	
 	
