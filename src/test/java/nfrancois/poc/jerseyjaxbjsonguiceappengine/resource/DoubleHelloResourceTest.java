@@ -45,7 +45,7 @@ public class DoubleHelloResourceTest extends JerseyTest {
 	protected AppDescriptor configure() {
 		ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getClasses().add(JAXBContextResolver.class);
-		return new WebAppDescriptor.Builder(/*JAXBContextResolver.class.getPackage().getName()*/)
+		return new WebAppDescriptor.Builder("com.sun.jersey.samples.jsonp.config")
 			        .contextListenerClass(GuiceServletConfig.class)
 			        .filterClass(GuiceFilter.class)
 			        .clientConfig(clientConfig)
