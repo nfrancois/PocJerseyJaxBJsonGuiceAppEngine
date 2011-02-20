@@ -30,22 +30,22 @@ import com.sun.jersey.test.framework.WebAppDescriptor;
 
 public class DoubleHelloResourceTest extends JerseyTest {
 	
-	private static Injector injector =  Guice.createInjector(new ServletModule() {
-		
-		@Override
-		protected void configureServlets() {
-			final Map<String, String> params = new HashMap<String, String>();
-			bind(DoubleHelloResource.class);
-			bind(JAXBContextResolver.class);
-			serve("/*").with(GuiceContainer.class, params);
-		}
-	});	
+	private static Injector injector;
 	
 	@Override
 	protected AppDescriptor configure() {
 		ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getClasses().add(JAXBContextResolver.class);
-		return new WebAppDescriptor.Builder("nfrancois.poc.jerseyjaxbjsonguiceappengine.resource")
+		injector = Guice.createInjector(new ServletModule() {
+			
+			@Override
+			protected void configureServlets() {
+				bind(DoubleHelloResource.class);
+				bind(JAXBContextResolver.class);
+				serve("/*").with(GuiceContainer.class);
+			}
+		});	
+		return new WebAppDescriptor.Builder()
 			        .contextListenerClass(GuiceTestConfig.class)
 			        .filterClass(GuiceFilter.class)
 			        .clientConfig(clientConfig)
