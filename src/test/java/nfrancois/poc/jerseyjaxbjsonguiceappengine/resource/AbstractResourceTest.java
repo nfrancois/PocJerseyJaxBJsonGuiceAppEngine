@@ -21,14 +21,12 @@ public abstract class AbstractResourceTest<T> extends JerseyTest {
 		ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getClasses().add(JAXBContextResolver.class);
 		injector = Guice.createInjector(new ServletModule() {
-			
 			@Override
 			protected void configureServlets() {
 				bind(getTestingResourceClass());
 				bind(JAXBContextResolver.class);
 				serve("/*").with(GuiceContainer.class);
 			}
-
 		});	
 		return new WebAppDescriptor.Builder()
 			        .contextListenerClass(GuiceTestConfig.class)
