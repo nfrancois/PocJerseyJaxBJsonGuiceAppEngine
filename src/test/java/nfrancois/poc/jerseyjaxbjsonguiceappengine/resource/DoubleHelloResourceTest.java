@@ -25,6 +25,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
+import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
 
@@ -40,23 +41,18 @@ public class DoubleHelloResourceTest extends JerseyTest {
 //		}
 //	});	
 	
-    public DoubleHelloResourceTest() {
-        super(new WebAppDescriptor.Builder(/*JAXBContextResolver.class.getPackage().getName()*/)
-                .contextListenerClass(GuiceServletConfig.class)
-                .filterClass(GuiceFilter.class)
-                .clientConfig(createClientConfigTest())
-                .servletPath("/")
-                .build());
-    }
-	
-	
-	private static ClientConfig createClientConfigTest() {
+	@Override
+	protected AppDescriptor configure() {
 		ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getClasses().add(JAXBContextResolver.class);
-		return clientConfig;
+		return new WebAppDescriptor.Builder(/*JAXBContextResolver.class.getPackage().getName()*/)
+			        .contextListenerClass(GuiceServletConfig.class)
+			        .filterClass(GuiceFilter.class)
+			        .clientConfig(clientConfig)
+			        .servletPath("/")
+			        .build();
 	}
-
-
+	
 	@Test
 	public void shoudHaveTwoHelloInNormalJson(){
 		String relativeUrl = "doublehello";
