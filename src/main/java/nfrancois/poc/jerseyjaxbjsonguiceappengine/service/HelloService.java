@@ -1,8 +1,9 @@
 package nfrancois.poc.jerseyjaxbjsonguiceappengine.service;
 
+import javax.inject.Singleton;
+
 import nfrancois.poc.jerseyjaxbjsonguiceappengine.model.Hello;
 
-import com.google.inject.Singleton;
 
 @Singleton
 public class HelloService {

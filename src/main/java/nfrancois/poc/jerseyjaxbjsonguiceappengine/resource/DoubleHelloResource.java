@@ -3,6 +3,8 @@ package nfrancois.poc.jerseyjaxbjsonguiceappengine.resource;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -11,9 +13,6 @@ import javax.ws.rs.core.MediaType;
 
 import nfrancois.poc.jerseyjaxbjsonguiceappengine.model.Hello;
 import nfrancois.poc.jerseyjaxbjsonguiceappengine.service.HelloService;
-
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 @Path("doublehello")
 @Singleton

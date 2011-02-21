@@ -1,5 +1,7 @@
 package nfrancois.poc.jerseyjaxbjsonguiceappengine.resource;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -11,8 +13,6 @@ import javax.ws.rs.core.MediaType;
 import nfrancois.poc.jerseyjaxbjsonguiceappengine.model.Hello;
 import nfrancois.poc.jerseyjaxbjsonguiceappengine.service.HelloService;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.sun.jersey.api.json.JSONWithPadding;
 
 @Singleton
