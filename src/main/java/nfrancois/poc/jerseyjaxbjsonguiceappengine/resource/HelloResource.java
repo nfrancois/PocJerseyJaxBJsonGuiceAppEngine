@@ -50,8 +50,7 @@ public class HelloResource {
 	
 	@GET
 	@Path("{name}.jsonp")
-//    @Produces("application/x-javascript")
-   @Produces({"application/x-javascript", "application/json", "application/xml"}) 
+    @Produces("application/x-javascript")
 	public JSONWithPadding replyWithJsonP(@PathParam("name") String name, @QueryParam("callback") @DefaultValue(CALLBACK_DEFAULT_NAME) String callback){
 		Hello hello = helloService.saysHelloToSomeone(name);
 		return new JSONWithPadding(hello, callback);
