@@ -101,8 +101,8 @@ public class HelloResourceTest extends AbstractResourceTest<HelloResource> {
 		assertThat(response.getStatus()).isEqualTo(Status.OK.getStatusCode());
 		assertThat(response.getType().toString()).isEqualTo("application/x-javascript");
 //		assertThat(response.getEntity(String.class)).isNotNull().startsWith("jsonpCallback");
-//		JSONWithPadding entity = response.getEntity(new GenericType<JSONWithPadding>(){});
-		Hello entity = response.getEntity(Hello.class);
+//		Hello entity = response.getEntity(new GenericType<Hello>(){});
+//		Hello entity = response.getEntity(Hello.class);
 //		assertThat(entity.getCallbackName()).isEqualTo("jsonpCallback");
 //		assertThat(entity.getJsonSource()).isNotNull().isEqualTo(hello);	
 	}	
