@@ -5,6 +5,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
+
 import javax.ws.rs.core.MediaType;
 
 import nfrancois.poc.jerseyjaxbjsonguiceappengine.model.Hello;
@@ -14,7 +16,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.ClientResponse.Status;
+import com.sun.jersey.api.json.JSONWithPadding;
 
 public class HelloResourceTest extends AbstractResourceTest<HelloResource> {
 
@@ -96,9 +100,11 @@ public class HelloResourceTest extends AbstractResourceTest<HelloResource> {
 		
 		assertThat(response.getStatus()).isEqualTo(Status.OK.getStatusCode());
 		assertThat(response.getType().toString()).isEqualTo("application/x-javascript");
-		assertThat(response.getEntity(String.class)).isNotNull().startsWith("jsonpCallback");
-//		Hello entity = response.getEntity(Hello.class);		
-//		assertThat(entity).isNotNull().isEqualTo(hello);	
+//		assertThat(response.getEntity(String.class)).isNotNull().startsWith("jsonpCallback");
+//		JSONWithPadding entity = response.getEntity(new GenericType<JSONWithPadding>(){});
+		Hello entity = response.getEntity(Hello.class);
+//		assertThat(entity.getCallbackName()).isEqualTo("jsonpCallback");
+//		assertThat(entity.getJsonSource()).isNotNull().isEqualTo(hello);	
 	}	
 	
 	private void doShoulReplyHello(MediaType type){

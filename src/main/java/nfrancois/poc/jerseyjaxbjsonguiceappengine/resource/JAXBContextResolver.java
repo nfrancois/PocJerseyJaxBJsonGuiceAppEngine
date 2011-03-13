@@ -15,7 +15,7 @@ public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 	/** Package that contains object that can be mapped */
 	private static final String JAXB_OBJECT_PACKAGE = "nfrancois.poc.jerseyjaxbjsonguiceappengine.model";
 
-	private JAXBContext context;
+	private final JAXBContext context;
 
 	public JAXBContextResolver() throws Exception {
 		this.context = new JSONJAXBContext(JSONConfiguration.natural().build(), JAXB_OBJECT_PACKAGE);
