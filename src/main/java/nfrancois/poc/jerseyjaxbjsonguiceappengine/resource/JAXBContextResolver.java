@@ -1,10 +1,10 @@
 package nfrancois.poc.jerseyjaxbjsonguiceappengine.resource;
 
-import javax.inject.Singleton;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 import javax.xml.bind.JAXBContext;
 
+import com.google.inject.Singleton;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
 
