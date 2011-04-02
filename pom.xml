@@ -11,7 +11,7 @@
 	<properties>
 		<downloadSources>true</downloadSources>
 		<java.version>1.6</java.version>
-		<gae.version>1.3.7</gae.version>
+		<gae.version>1.4.2</gae.version>
 		<gae.application.version>${project.version}</gae.application.version>
 		<gae.port>8080</gae.port>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -122,6 +122,12 @@
 			<version>${gae.version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>r08</version>
+		</dependency>		
 
 		<dependency>
 			<groupId>javax.jdo</groupId>
@@ -184,7 +190,7 @@
 
 		<dependency>
 			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-tools-api</artifactId>
+			<artifactId>appengine-tools-sdk</artifactId>
 			<version>${gae.version}</version>
 		</dependency>
 
@@ -262,7 +268,7 @@
 		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-servlet</artifactId>
-			<version>3.0-rc2</version>
+			<version>3.0</version>
 		</dependency>
 
 	</dependencies>
