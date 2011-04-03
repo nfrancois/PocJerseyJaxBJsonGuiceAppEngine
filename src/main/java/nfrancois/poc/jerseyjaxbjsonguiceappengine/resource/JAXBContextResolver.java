@@ -4,6 +4,8 @@ import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 import javax.xml.bind.JAXBContext;
 
+import nfrancois.poc.jerseyjaxbjsonguiceappengine.model.Hello;
+
 import com.google.inject.Singleton;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
@@ -13,7 +15,7 @@ import com.sun.jersey.api.json.JSONJAXBContext;
 public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 
 	/** Package that contains object that can be mapped */
-	private static final String JAXB_OBJECT_PACKAGE = "nfrancois.poc.jerseyjaxbjsonguiceappengine.model";
+	private static final String JAXB_OBJECT_PACKAGE = Hello.class.getPackage().getName();
 
 	private final JAXBContext context;
 
