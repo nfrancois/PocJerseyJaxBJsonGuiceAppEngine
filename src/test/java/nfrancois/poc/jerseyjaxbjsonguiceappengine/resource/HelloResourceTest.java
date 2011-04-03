@@ -75,7 +75,6 @@ public class HelloResourceTest extends AbstractResourceTest<HelloResource> {
 	public void shoudBeJsonpWithCallbackNameParam(){
 		String message = "Hello";
 		String name ="Nicolas";
-		Hello hello = new Hello(message, name);	
 		when(helloServiceMock.saysHelloToSomeone("Nicolas")).thenReturn(new Hello(message, name));
 		String callbackName = "monCallback";
 		
