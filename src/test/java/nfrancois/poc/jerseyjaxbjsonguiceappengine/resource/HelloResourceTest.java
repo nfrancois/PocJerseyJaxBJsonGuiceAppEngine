@@ -84,8 +84,6 @@ public class HelloResourceTest extends AbstractResourceTest<HelloResource> {
 		assertThat(response.getStatus()).isEqualTo(Status.OK.getStatusCode());
 		assertThat(response.getType().toString()).isEqualTo("application/x-javascript");
 		assertThat(response.getEntity(String.class)).isNotNull().startsWith(callbackName);
-//		Hello entity = response.getEntity(Hello.class);		
-//		assertThat(entity).isNotNull().isEqualTo(hello);		
 	}
 	
 	
@@ -100,11 +98,6 @@ public class HelloResourceTest extends AbstractResourceTest<HelloResource> {
 		
 		assertThat(response.getStatus()).isEqualTo(Status.OK.getStatusCode());
 		assertThat(response.getType().toString()).isEqualTo("application/x-javascript");
-//		assertThat(response.getEntity(String.class)).isNotNull().startsWith("jsonpCallback");
-//		Hello entity = response.getEntity(new GenericType<Hello>(){});
-//		Hello entity = response.getEntity(Hello.class);
-//		assertThat(entity.getCallbackName()).isEqualTo("jsonpCallback");
-//		assertThat(entity.getJsonSource()).isNotNull().isEqualTo(hello);	
 	}	
 	
 	private void doShoulReplyHello(MediaType type){

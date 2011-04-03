@@ -17,7 +17,7 @@ import com.google.inject.Singleton;
 
 @Path("doublehello")
 @Singleton
-@Produces({MediaType.APPLICATION_JSON/*, MediaType.APPLICATION_XML*/})
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class DoubleHelloResource {
 	
 	@Inject
