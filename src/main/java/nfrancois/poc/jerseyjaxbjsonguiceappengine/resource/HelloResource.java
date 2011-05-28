@@ -18,10 +18,10 @@ import nfrancois.poc.jerseyjaxbjsonguiceappengine.model.Hello;
 import nfrancois.poc.jerseyjaxbjsonguiceappengine.service.HelloService;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
+import com.google.inject.servlet.RequestScoped;
 import com.sun.jersey.api.json.JSONWithPadding;
 
-@Singleton
+@RequestScoped
 @Path("hello")
 public class HelloResource {
 	
