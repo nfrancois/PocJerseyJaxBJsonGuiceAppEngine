@@ -6,12 +6,10 @@ import javax.xml.bind.JAXBContext;
 
 import nfrancois.poc.jerseyjaxbjsonguiceappengine.model.Hello;
 
-import com.google.inject.Singleton;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
 
 @Provider
-@Singleton
 public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 
 	/** Package that contains object that can be mapped */

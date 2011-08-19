@@ -2,6 +2,7 @@ package nfrancois.poc.jerseyjaxbjsonguiceappengine.resource;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Singleton;
 import com.google.inject.servlet.GuiceFilter;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
@@ -24,7 +25,7 @@ public abstract class AbstractResourceTest<T> extends JerseyTest {
 			@Override
 			protected void configureServlets() {
 				bind(getTestingResourceClass());
-				bind(JAXBContextResolver.class);
+				bind(JAXBContextResolver.class).in(Singleton.class);
 				serve("/*").with(GuiceContainer.class);
 			}
 		});	
